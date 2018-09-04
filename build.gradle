@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'com.github.nettee.fog'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.jline', name: 'jline', version: '3.6.2'
+}
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'com.github.nettee.fog.Fog'
+        )
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
